@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Video im Vollbild</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: black;
+      height: 100%;
+    }
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <video id="video" autoplay muted playsinline>
+    <source src="video.mp4" type="video/mp4">
+    Dein Browser unterstützt das Video-Tag nicht.
+  </video>
+
+  <script>
+    const video = document.getElementById("video");
+
+    // Versuche sofort Vollbild und Wiedergabe zu starten
+    function startPlayback() {
+      video.play().catch(console.warn);
+      if (document.fullscreenElement === null) {
+        video.requestFullscreen().catch(console.warn);
+      }
+    }
+
+    // Beim Laden direkt versuchen zu starten
+    window.addEventListener("load", startPlayback);
+
+    // Wenn der Tab wieder aktiv wird → abspielen
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden) {
+        startPlayback();
+      }
+    });
+
+    // Klick auf das Video → auch als Trigger verwenden
+    video.addEventListener("click", startPlayback);
+  </script>
+</body>
+</html>
