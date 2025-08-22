@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fullscreen Autoplay Video</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: black;
+      height: 100%;
+    }
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <video id="video" autoplay muted playsinline loop>
+    <source src="video.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <script>
+    const video = document.getElementById("video");
+
+    function startPlayback() {
+      video.play().catch(console.warn);
+      if (document.fullscreenElement === null) {
+        video.requestFullscreen().catch(console.warn);
+      }
+    }
+
+    // Start video and fullscreen on page load
+    window.addEventListener("load", startPlayback);
+
+    // Resume playback when tab becomes visible again
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden) {
+        startPlayback();
+      }
+    });
+
+    // Clicking the video also triggers playback/fullscreen
+    video.addEventListener("click", startPlayback);
+  </script>
+</body>
+</html>
