@@ -33,3 +33,15 @@ This project provides a simple HTML5 page that plays a local video automatically
 
 ## 📁 Folder Structure
 
+my-video-tab/
+├── index.html
+└── video.mp4
+
+## 📷 Preview
+
+A preview of the video will fill the entire screen with no UI elements except browser controls (if not in fullscreen mode).  
+No internet connection required – runs entirely from your local machine.
+
+---
+
+**Made with ❤️ for local video display and fullscreen simplicity.**
