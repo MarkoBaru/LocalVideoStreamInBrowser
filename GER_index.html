@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Video im Vollbild</title>
+  <title>Fullscreen Autoplay Video</title>
   <style>
     html, body {
       margin: 0;
@@ -18,15 +18,14 @@
   </style>
 </head>
 <body>
-  <video id="video" autoplay muted playsinline>
+  <video id="video" autoplay muted playsinline loop>
     <source src="video.mp4" type="video/mp4">
-    Dein Browser unterstützt das Video-Tag nicht.
+    Your browser does not support the video tag.
   </video>
 
   <script>
     const video = document.getElementById("video");
 
-    // Versuche sofort Vollbild und Wiedergabe zu starten
     function startPlayback() {
       video.play().catch(console.warn);
       if (document.fullscreenElement === null) {
@@ -34,17 +33,17 @@
       }
     }
 
-    // Beim Laden direkt versuchen zu starten
+    // Try to start playback and fullscreen on load
     window.addEventListener("load", startPlayback);
 
-    // Wenn der Tab wieder aktiv wird → abspielen
+    // Resume playback when returning to the tab
     document.addEventListener("visibilitychange", () => {
       if (!document.hidden) {
         startPlayback();
       }
     });
 
-    // Klick auf das Video → auch als Trigger verwenden
+    // Clicking on the video also triggers playback/fullscreen
     video.addEventListener("click", startPlayback);
   </script>
 </body>
